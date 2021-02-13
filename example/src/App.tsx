@@ -1,18 +1,17 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import Imepay from 'react-native-imepay';
 
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    Imepay.multiply(3, 7).then(setResult);
-  }, []);
+  const openImePay = () =>
+    Imepay.makePayment("TEST", "TEST", "https://merchantname.com/merchant_transaction_recording_method", "200", "Reference Value", "TEST", "TEST", "TEST").then(setResult);
 
   return (
     <View style={styles.container}>
+      <Button title={"Open"} onPress={openImePay} style={{ width: 100, height: 40, borderRadius: 6, backgroundColor: 'red' }} />
       <Text>Result: {result}</Text>
     </View>
   );
