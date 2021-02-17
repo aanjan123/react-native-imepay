@@ -5,5 +5,5 @@ type ImepayType = {
 };
 
 const { Imepay } = NativeModules;
-
+console.log({ NativeModules })
 export default Imepay as ImepayType;

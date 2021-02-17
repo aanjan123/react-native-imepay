@@ -5,11 +5,10 @@ platform :ios, '10.0'
 
 target 'ImepayExample' do
   config = use_native_modules!
+  frameworks = use_frameworks!
 
   use_react_native!(:path => config["reactNativePath"])
-
-      pod 'react-native-imepay', :path => '../..'
-      pod 'IMEPay'
+  frameworks[pod 'react-native-imepay',  :path => '../..']
 
   # Enables Flipper.
   #
