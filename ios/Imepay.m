@@ -2,7 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(Imepay, NSObject)
 
-RCT_EXTERN_METHOD(makePayment:(NSString *)merchantCode
+  RCT_EXTERN_METHOD(makePayment:(NSString *)merchantCode
                   merchantName:(NSString *)merchantName
                   merchantUrl:(NSString *)merchantUrl
                   amount:(NSString *)amount
@@ -10,9 +10,8 @@ RCT_EXTERN_METHOD(makePayment:(NSString *)merchantCode
                   module:(NSString *)module
                   username:(NSString *)username
                   password:(NSString *)password
-//                  password:(NSString *)password
                 resolver:(RCTPromiseResolveBlock)resolve
                 rejector:(RCTPromiseRejectBlock)reject
                 )
-
+  RCT_EXTERN_METHOD(printttt:(NSString *)merchantId)
 @end

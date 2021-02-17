@@ -6,8 +6,24 @@ import Imepay from 'react-native-imepay';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
-  const openImePay = () =>
-    Imepay.makePayment("TEST", "TEST", "https://merchantname.com/merchant_transaction_recording_method", "200", "Reference Value", "TEST", "TEST", "TEST").then(setResult);
+
+  const openImePay = async () => {
+    try {
+      const result = await Imepay.makePayment(
+        "TEST", // MERCHANT_CODE
+        "TEST", // MERCHANT_NAME
+        "https://merchantname.com/merchant_transaction_recording_method", // MERCAHNT_TRANSACTION_RECORDING_URL
+        "200", // AMOUNT
+        "Reference Value",  // REFERENCE_ID
+        "TEST", // MODULE
+        "TEST", // USERNAME
+        "TEST"  //PASSWORD
+      )
+      console.log({ result })
+    } catch (e) {
+      console.log({ e })
+    }
+  }
 
   return (
     <View style={styles.container}>
