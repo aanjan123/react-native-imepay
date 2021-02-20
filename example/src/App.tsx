@@ -5,7 +5,6 @@ import Imepay from 'react-native-imepay';
 
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
 
   const openImePay = async () => {
     try {
@@ -17,7 +16,8 @@ export default function App() {
         "Reference Value",  // REFERENCE_ID
         "TEST", // MODULE
         "TEST", // USERNAME
-        "TEST"  //PASSWORD
+        "TEST",  //PASSWORD
+        "TEST" // env TEST or PROD
       )
       console.log({ result })
     } catch (e) {
@@ -28,7 +28,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button title={"Open"} onPress={openImePay} style={{ width: 100, height: 40, borderRadius: 6, backgroundColor: 'red' }} />
-      <Text>Result: {result}</Text>
     </View>
   );
 }

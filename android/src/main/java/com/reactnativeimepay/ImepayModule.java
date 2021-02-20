@@ -32,10 +32,11 @@ public class ImepayModule extends ReactContextBaseJavaModule {
     // Example method
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void makePayment(String MERCHANT_CODE, String MERCHANT_NAME,String MERCAHNT_TRANSACTION_RECORDING_URL,String AMOUNT,String REFERENCE_ID,String MODULE,String USERNAME,String PASSWORD,  Promise promise) {
-     IMEPayment imePayment = new IMEPayment(getCurrentActivity(), ENVIRONMENT.TEST);
+    public void makePayment(String MERCHANT_CODE, String MERCHANT_NAME,String MERCAHNT_TRANSACTION_RECORDING_URL,String AMOUNT,String REFERENCE_ID,String MODULE,String USERNAME,String PASSWORD, Sring ENV,  Promise promise) {
 
-      imePayment.performPayment(MERCHANT_CODE,
+        IMEPayment imePayment = new IMEPayment(getCurrentActivity(), ENV.equals("PROD") ? ENVIRONMENT.LIVE: ENVIRONMENT.TEST);
+
+        imePayment.performPayment(MERCHANT_CODE,
                           MERCHANT_NAME,
                           MERCAHNT_TRANSACTION_RECORDING_URL,
                           AMOUNT,
