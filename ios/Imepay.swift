@@ -3,8 +3,9 @@ import Foundation
 
 @objc(Imepay)
 class Imepay: NSObject {
-    var resolveCallback: RCTPromiseResolveBlock?
-    var rejectCallback: RCTPromiseRejectBlock?
+    private var resolveCallback: RCTPromiseResolveBlock?
+    private var rejectCallback: RCTPromiseRejectBlock?
+    private var manager = IMPPaymentManager()
 
     @objc
     static func requiresMainQueueSetup() -> Bool {
@@ -21,10 +22,9 @@ class Imepay: NSObject {
         username:String,
         password:String
     ) {
-        print("==========in the func==========")
+        print("==========Starting IME PAY==========")
         print("username \(username), password \(password), merchantCode \(merchantCode), merchantName \(merchantName), merchantUrl \(merchantUrl), amount \(amount), referenceId \(referenceId), module \(module) ")
-        let manager = IMEPay.IMPPaymentManager(environment: Test)
-        manager?.pay(
+        manager.pay(
             withUsername: username ,
             password: password,
             merchantCode: merchantCode,
@@ -35,8 +35,7 @@ class Imepay: NSObject {
             module: module,
             success: {_ in
 
-            print("==========success==========")
-            
+            print("==========IME PAY SUCCESS==========")
               // You can extract the following info from transactionInfo
 
 //              transactionInfo.responseCode
@@ -52,7 +51,7 @@ class Imepay: NSObject {
            self.resolveCallback!("referenceId");
 
         }, failure: { (transactionInfo, errorMessage) in
-            print("==========error==========")
+            print("==========IME PAY ERROR==========")
             let error = NSError(domain: "Esewa Error", code: 101)
             self.rejectCallback!("500", errorMessage, error)
         });
@@ -69,11 +68,16 @@ class Imepay: NSObject {
         module:String,
         username:String,
         password:String,
+        env:String,
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejector reject: @escaping RCTPromiseRejectBlock
     ) -> Void {
         resolveCallback = resolve
         rejectCallback = reject
+        
+        let environment: APIEnvironment = env == "PROD" ? Live : Test
+
+        self.manager = IMPPaymentManager.init(environment: environment)
 
         DispatchQueue.main.async {
             self.run(

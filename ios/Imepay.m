@@ -10,6 +10,7 @@
                   module:(NSString *)module
                   username:(NSString *)username
                   password:(NSString *)password
+                  env:(NSString *)env
                 resolver:(RCTPromiseResolveBlock)resolve
                 rejector:(RCTPromiseRejectBlock)reject
                 )
