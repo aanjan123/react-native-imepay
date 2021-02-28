@@ -22,8 +22,9 @@ class Imepay: NSObject {
         username:String,
         password:String
     ) {
-        print("==========Starting IME PAY==========")
-        print("username \(username), password \(password), merchantCode \(merchantCode), merchantName \(merchantName), merchantUrl \(merchantUrl), amount \(amount), referenceId \(referenceId), module \(module) ")
+        debugPrint("==========Starting IME PAY==========")
+        debugPrint("username \(username), password \(password), merchantCode \(merchantCode), merchantName \(merchantName), merchantUrl \(merchantUrl), amount \(amount), referenceId \(referenceId), module \(module) ")
+        
         manager.pay(
             withUsername: username ,
             password: password,
@@ -33,25 +34,26 @@ class Imepay: NSObject {
             amount: amount,
             referenceId: referenceId,
             module: module,
-            success: {_ in
+            success: { transactionInfo in
 
-            print("==========IME PAY SUCCESS==========")
-              // You can extract the following info from transactionInfo
-
-//              transactionInfo.responseCode
+                debugPrint("==========IME PAY SUCCESS==========")
 
               // Response Code 100:- Transaction successful.
               // Response Code 101:- Transaction failed.
 
-//              transactionInfo.responseDescription // ResponseDescription, message sent from server
-//              transactionInfo.transactionId // Transaction Id, Unique ID generated from IME Pay system.
-//              transctionInfo.customerMsisdn // Customer mobile number (IME Pay wallet ID)
-//              transctionInfo.amount // Payment Amount
-//              transactionInfo.referenceId // Reference Value
-           self.resolveCallback!("referenceId");
+                var dict = [String: Any]()
+                
+                dict["responseCode"] = transactionInfo?.responseCode
+                dict["responseDescription"] = transactionInfo?.responseDescription
+                dict["transactionId"] = transactionInfo?.transactionId
+                dict["customerMsisdn"] = transactionInfo?.customerMsisdn
+                dict["amount"] = transactionInfo?.amount
+                dict["referenceId"] = transactionInfo?.referenceId
+                
+                self.resolveCallback!(dict);
 
         }, failure: { (transactionInfo, errorMessage) in
-            print("==========IME PAY ERROR==========")
+            debugPrint("==========IME PAY ERROR==========")
             let error = NSError(domain: "Esewa Error", code: 101)
             self.rejectCallback!("500", errorMessage, error)
         });

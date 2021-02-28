@@ -87,6 +87,19 @@ const result = await Imepay.makePayment(
   'TEST',
   'TEST'
 );
+
+Response Format:
+{
+  responseCode: ''
+  responseDescription: ''
+  transactionId: ''
+  customerMsisdn: ''
+  amount: ''
+  referenceId: ''
+}
+
+// Response Code 100:- Transaction successful.
+// Response Code 101:- Transaction failed.
 ```
 
 Support us by using this library
