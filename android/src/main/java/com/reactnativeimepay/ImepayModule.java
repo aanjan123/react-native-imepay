@@ -32,7 +32,8 @@ public class ImepayModule extends ReactContextBaseJavaModule {
     // Example method
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void makePayment(String MERCHANT_CODE, String MERCHANT_NAME,String MERCAHNT_TRANSACTION_RECORDING_URL,String AMOUNT,String REFERENCE_ID,String MODULE,String USERNAME,String PASSWORD, Sring ENV,  Promise promise) {
+    public void makePayment(String MERCHANT_CODE, String MERCHANT_NAME,String MERCAHNT_TRANSACTION_RECORDING_URL,String AMOUNT,String REFERENCE_ID,String MODULE,String USERNAME,String PASSWORD, String ENV,  Promise promise) {
+
 
         IMEPayment imePayment = new IMEPayment(getCurrentActivity(), ENV.equals("PROD") ? ENVIRONMENT.LIVE: ENVIRONMENT.TEST);
 
@@ -54,7 +55,14 @@ public class ImepayModule extends ReactContextBaseJavaModule {
               // msisdn : Customer Mobile Number
               // amount : Amount paid by customer
               // refId : Reference Value
-              promise.resolve(transactionId);
+             WritableMap map = Arguments.createMap();
+             map.putString("responseCode", String.valueOf(responseCode));
+             map.putString("responseDescription", responseDescription);
+             map.putString("transactionId", transactionId);
+             map.putString("msisdn", msisdn);
+             map.putString("amount", amount);
+             map.putString("refId", refId);
+              promise.resolve(map);
            }
 });
     }

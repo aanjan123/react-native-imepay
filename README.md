@@ -106,14 +106,12 @@ Support us by using this library
 
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 <a href="https://github.com/andreshsingh" target="_blank"><img src="https://avatars.githubusercontent.com/u/30138390?s=400&u=908ebe452b0221fa1b04a3de0063d3de385edd06&v=4"
 width=50
 height=50
 raw=true
 alt="Andresh Singh"
 style="border-radius: 40px;margin-top:10px" ></a>
-
 
 ## License
 
