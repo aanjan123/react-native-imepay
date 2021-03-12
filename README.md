@@ -35,8 +35,7 @@ Then simply import:
 ```
 In case of error on ios
 
-frameworks = use_frameworks!
-frameworks[pod 'react-native-imepay']
+use_frameworks! in your pod file.
 ```
 
 ## Usage
@@ -54,6 +53,7 @@ import Imepay from 'react-native-imepay';
  * @MODULE String
  * @USERNAME String
  * @PASSWORD String
+ * @Env String
  *
  * @return Promise
  * */
@@ -66,7 +66,8 @@ Imepay.makePayment(
   REFERENCE_ID,
   MODULE,
   USERNAME,
-  PASSWORD
+  PASSWORD,
+  (Env: 'Live' | 'Test')
 );
 ```
 
@@ -85,7 +86,8 @@ const result = await Imepay.makePayment(
   'Reference Value',
   'TEST',
   'TEST',
-  'TEST'
+  'TEST',
+  'Live'
 );
 
 Response Format:
